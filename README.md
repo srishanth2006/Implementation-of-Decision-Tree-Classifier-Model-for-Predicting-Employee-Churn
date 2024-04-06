@@ -20,10 +20,43 @@ Program to implement the Decision Tree Classifier Model for Predicting Employee 
 Developed by: 
 RegisterNumber:  
 */
+/*
+Program to implement the Decision Tree Classifier Model for Predicting Employee Churn.
+Developed by: 
+RegisterNumber:  
+*/
+
+import pandas as pd
+data=pd.read_csv('/content/Employee_EX6.csv')
+data.head()
+data.info()
+data.isnull().sum()
+data["left"].value_counts()
+from sklearn.preprocessing import LabelEncoder
+le=LabelEncoder()
+data["salary"]=le.fit_transform(data["salary"])
+data.head()
+x=data[["satisfaction_level","last_evaluation","number_project","average_montly_hours","time_spend_company","Work_accident","promotion_last_5years","salary"]]
+x.head()
+y=data["left"]
+from sklearn.model_selection import train_test_split
+x_train,x_test,y_train,y_test=train_test_split(x,y,test_size=0.2,random_state=100)
+from sklearn.tree import DecisionTreeClassifier
+dt=DecisionTreeClassifier(criterion="entropy")
+dt.fit(x_train,y_train)
+y_pred=dt.predict(x_test)
+from sklearn import metrics
+accuracy=metrics.accuracy_score(y_test,y_pred)
+accuracy
+dt.predict([[0.5,0.8,9,260,6,0,1,2]])
+
 ```
 
-## Output:
-![decision tree classifier model](sam.png)
+
+# Output:
+#![Screenshot 2024-04-06 062951](https://github.com/srishanth2006/Implementation-of-Decision-Tree-Classifier-Model-for-Predicting-Employee-Churn/assets/150319470/b40c70b6-1769-4b64-b9f5-066b99f10115)
+![Screenshot 2024-04-06 063005](https://github.com/srishanth2006/Implementation-of-Decision-Tree-Classifier-Model-for-Predicting-Employee-Churn/assets/150319470/16fe714a-2157-46b9-897a-341ef2c74853)
+![Screenshot 2024-04-06 063018](https://github.com/srishanth2006/Implementation-of-Decision-Tree-Classifier-Model-for-Predicting-Employee-Churn/assets/150319470/d6d24107-ffb4-4518-8d6c-d5dcd4e04d33)
 
 
 ## Result:
